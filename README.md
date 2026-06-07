@@ -1,88 +1,75 @@
 # QA_Online_Shop
 Testing the online shopping website in playwright.
 
-Automated end-to-end test suite for the Swag Labs online shop, built with Playwright and JavaScript. This project tests the core functionality of the application across multiple user accounts to ensure reliability and correctness.
+I built the automated test suite using Playwright and JavaScript. The tests cover the four core areas of the application — login, cart, checkout, and product inventory — across all four user accounts provided.
+
+The full suite contains 18 tests and runs in approximately 35 seconds.
 
 Tech Stack
-Playwright — end-to-end browser automation
-JavaScript — test scripting language
+Playwright — browser automation and test runner
+JavaScript — scripting language
 Node.js — runtime environment
 
-Prerequisites
-Make sure you have Node.js installed on your machine. You can download it from nodejs.org.
-
-Installation
-
-Clone the repository and install dependencies:
+Setup and Installation
+Make sure you have Node.js installed from nodejs.org, then run the following:
 npm install
 npx playwright install
+npx playwright test
 
-Running Tests
-Run all tests : npx playwright test
 
-Run all tests with browser visible : npx playwright test --headed
+How to Run
+Run all tests — npx playwright test
+Run with visible browser — npx playwright test --headed
+Run a single file — npx playwright test tests/login.spec.js
+View HTML report — npx playwright show-report
 
-Run a specific test file : npx playwright test tests/login.spec.js --headed
-
-View the HTML test report after running : npx playwright show-report
 
 Project Structure
+tests/login.spec.js — login scenarios for all user types
+tests/cart.spec.js — adding and removing products
+tests/checkout.spec.js — full purchase flow and edge cases
+tests/inventory.spec.js — product display, sorting and images
+test-data/users.js — all user credentials in one place
+playwright.config.js — Playwright configuration and reporter
 
-QA_Online_Shop/
-
-tests/
-     login.spec.js
-     cart.spec.js
-     checkout.spec.js
-     inventory.spec.js
-test-data/
-     users.js
-playwright.config.js
-README.md 
 
 Test Coverage
 
-Login Tests — 7 scenarios
-Standard user can login successfully.
-Locked out user cannot login and sees error message.
-Problem user can login successfully.
-Performance glitch user can login despite slow loading.
-Login fails when username is empty.
-Login fails when password is empty.
-Login fails with wrong credentials.
+Login — 7 tests
+Standard user can login successfully
+Locked out user cannot login and sees error message
+Problem user can login but has broken images
+Performance glitch user can login despite slow loading
+Login fails when username is empty
+Login fails when password is empty
+Login fails with wrong credentials
 
-Cart Tests — 4 scenarios
-User can add a product to cart.
-User can add multiple products to cart.
-User can remove a product from the inventory page.
-User can remove a product from the cart page.
+Cart — 4 tests
+User can add a product to cart
+User can add multiple products to cart
+User can remove a product from the inventory page
+User can remove a product from the cart page
 
-Checkout Tests — 3 scenarios
-User can complete a full purchase successfully.
-Checkout fails when form fields are empty.
-User can cancel checkout and return to cart.
+Checkout — 3 tests
+User can complete a full purchase successfully
+Checkout fails when form fields are left empty
+User can cancel checkout and return to cart
 
-Inventory Tests — 4 scenarios
-Six products are displayed on the inventory page.
-Products can be sorted by price low to high.
-Product images load correctly for standard user.
-Product images are broken for problem user.
+Inventory — 4 tests
+Six products are displayed on the inventory page
+Products can be sorted by price low to high
+Product images load correctly for standard user
+Product images are broken for problem user
 
-User Accounts Tested
-User  - Expected Behaviour
-standard_user - Full functionality works as expected
-locked_out_user - Cannot login, sees error message
-problem_user - Can login but product images are broken
-performance_glitch_user - Can login and shop despite slow load times
+User Accounts
+standard_user — full functionality works as expected
+locked_out_user — blocked from login with a clear error message
+problem_user — can login but all product images are broken
+performance_glitch_user — can login and shop but with slow loading
 
-Key Design Decisions
-Test data is kept separate from test logic inside the test-data/users.js file. This means if credentials change they only need updating in one place.
-Each test file uses a beforeEach block to handle login setup automatically before every test. This avoids repeating login code and keeps individual tests clean and focused.
-The playwright.config.js is configured to automatically capture screenshots and record video only when a test fails. This makes debugging failed tests much faster without slowing down passing tests.
-The performance_glitch_user tests use an extended timeout of 15 seconds to account for the intentionally slow loading behaviour of this account.
+Notes
 
-Failure Artifacts
-When a test fails, Playwright automatically saves the following inside the test-results folder:
-Screenshot of the browser at the point of failure
-Video recording of the entire test run
-Error context file with full details
+Test credentials are stored separately in test-data/users.js rather than hardcoded inside each test file. This keeps things clean and easy to maintain.
+Each test file uses a beforeEach block to handle the login setup automatically before every test so the tests themselves stay focused on what they are actually checking.
+Screenshots and videos are only captured on test failures so normal passing runs stay fast. When a test does fail the report includes a screenshot and full video recording of what happened.
+The performance glitch user tests use a 15 second timeout to account for the intentionally slow loading behaviour of that account.
