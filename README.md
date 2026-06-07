@@ -35,7 +35,7 @@ tests/
      cart.spec.js
      checkout.spec.js
      inventory.spec.js
- test-data/
+test-data/
      users.js
 playwright.config.js
 README.md 
