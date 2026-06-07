@@ -3,10 +3,10 @@ Testing the online shopping website in playwright.
 
 Automated end-to-end test suite for the Swag Labs online shop, built with Playwright and JavaScript. This project tests the core functionality of the application across multiple user accounts to ensure reliability and correctness.
 
-Tech Stack
-Playwright — end-to-end browser automation
-JavaScript — test scripting language
-Node.js — runtime environment
+Tech Stack.
+Playwright — end-to-end browser automation.
+JavaScript — test scripting language.
+Node.js — runtime environment.
 
 Prerequisites
 Make sure you have Node.js installed on your machine. You can download it from nodejs.org.
