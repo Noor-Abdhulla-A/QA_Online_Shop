@@ -26,7 +26,7 @@ The full suite contains **18 tests** and runs in approximately **35 seconds**.
 Make sure you have Node.js installed from [nodejs.org](https://nodejs.org), 
 then run the following:
 
-```bash
+//```bash
 npm install
 npx playwright install
 
